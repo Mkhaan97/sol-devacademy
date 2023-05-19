@@ -87,7 +87,7 @@ function Main() {
 
   const fetchJourneys = async () => {
     try {
-      const response = await fetch('http://localhost:8000/journeys?limit=10'); // Update the endpoint to match your backend API route
+      const response = await fetch('http://localhost:8000/journeys'); // Update the endpoint to match your backend API route
       const data = await response.json();
       setJourneys(data);
     } catch (error) {
@@ -123,8 +123,8 @@ function Main() {
               <tr className='table-row' key={journey._id}>
                 <td>{journey['Departure station name']}</td>
                 <td>{journey['Return station name']}</td>
-                <td>{(journey['Covered distance (m)'] / 1000).toFixed(1)} km</td>
-                <td>{Math.floor(journey['Duration (sec'][')'] / 60)} minutes</td>
+                <td>{(journey['Covered distance (m)'] / 1000).toFixed(2)} km</td>
+                <td>{(journey['Duration (sec'][')'] / 60).toFixed(2)} minutes</td>
               </tr>
             ))}
           </tbody>
