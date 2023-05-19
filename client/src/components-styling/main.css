@@ -86,4 +86,16 @@ body {
 
 .table-row > td {
   padding-left: 20px;
+  width: 2em;
+}
+
+.pagination-button {
+  padding: 10px 20px;
+  margin-left: 1em;
+  margin-top: 5em;
+  margin-bottom: 1em;
+}
+
+.active {
+  background-color: darkgray;
 }

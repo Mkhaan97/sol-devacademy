@@ -4,7 +4,7 @@ const journeyRoutes = require('./routes/journeys');
 const csvImporter = require('./csv/csvImporter');
 
 const app = express();
-const port = 3000;
+const port = 8000;
 
 app.use('/journeys', journeyRoutes);
 
