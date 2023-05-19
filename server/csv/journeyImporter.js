@@ -3,7 +3,7 @@ const fs = require('fs');
 const csv = require('csv-parser');
 const Journey = require('../models/Journey');
 
-async function importDataFromCSV() {
+async function importJourneysFromCSV() {
   return new Promise((resolve, reject) => {
     const fileNames = ['2021-05.csv', '2021-06.csv', '2021-07.csv']; // Update with your desired file names
     const importCountLimit = 100000; // Limited to 100 000 journeys per file because of storage issues in MongoDB Atlas 
@@ -62,4 +62,4 @@ async function importDataFromCSV() {
   });
 }
 
-module.exports = { importDataFromCSV };
+module.exports = { importJourneysFromCSV };
