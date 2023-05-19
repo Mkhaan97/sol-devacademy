@@ -90,7 +90,7 @@ function Main() {
                 <td>{journey['Departure station name']}</td>
                 <td>{journey['Return station name']}</td>
                 <td>{(journey['Covered distance (m)'] / 1000).toFixed(2)} km</td>
-                <td>{(journey['Duration (sec'][')'] / 60).toFixed(2)} minutes</td>
+                <td>{(journey['Duration (sec'][')'] / 60).toFixed(2)} min</td>
               </tr>
             ))}
           </tbody>
