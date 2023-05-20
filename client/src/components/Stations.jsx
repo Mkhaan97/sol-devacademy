@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import '../components-styling/main.css';
+import '../components-styling/stations.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBicycle } from '@fortawesome/free-solid-svg-icons';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function Main() {
-  const [journeys, setJourneys] = useState([]);
+function Stations() {
+  const [stations, setStations] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    fetchJourneys();
+    fetchStations();
   }, [currentPage]);
 
-  const fetchJourneys = async () => {
+  const fetchStations = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/journeys?limit=100&page=${currentPage}`);
+      const response = await fetch(`http://localhost:8000/stations?limit=100&page=${currentPage}`);
       const data = await response.json();
-      setJourneys(data.journeys);
+      setStations(data.stations);
       setTotalPages(data.totalPages);
-      console.log(data.journeys);
+      console.log(data.stations);
     } catch (error) {
-      console.log('Failed to fetch journeys:', error);
+      console.log('Failed to fetch stations:', error);
     }
   };
 
@@ -67,7 +67,7 @@ function Main() {
       <div className="home-nav">
         <ul className="homenav-list">
           <FontAwesomeIcon id="homeIcon" icon={faBicycle} size="2x" />
-          <li><Link to="/stations" className='nav-link'>Stations</Link></li>
+          <li><Link to="/" className='nav-link'>Journeys</Link></li>
         </ul>
         <input id="home-search" type="text" placeholder="Search for stations and see the rides!" />
       </div>
@@ -75,23 +75,23 @@ function Main() {
         <h1>Welcome to Helsinki Bike App!</h1>
       </div>
       <div className="ride-div">
-        <h2 className="ride-text">Take a closer look at the journeys around Helsinki!</h2>
+        <h2 className="ride-text">See the stations in Helsinki!</h2>
         <table className="ride-table">
           <thead>
             <tr className="table-headers">
-              <th>Departure Station</th>
-              <th>Return Station</th>
-              <th>Distance</th>
-              <th>Duration</th>
+              <th>Station Name</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>Operator</th>
             </tr>
           </thead>
           <tbody>
-            {journeys.map((journey) => (
-              <tr className="table-row" key={journey._id}>
-                <td>{journey['Departure station name']}</td>
-                <td>{journey['Return station name']}</td>
-                <td>{(journey['Covered distance (m)'] / 1000).toFixed(2)} km</td>
-                <td>{(journey['Duration (sec'][')'] / 60).toFixed(2)} min</td>
+            {stations.map((station) => (
+              <tr className="table-row" key={station._id}>
+                <td>{station.Name}</td>
+                <td>{station.Osoite}</td>
+                <td>{station.Kaupunki.trim() !== '' ? station.Kaupunki : 'Missing'}</td>                
+                <td>{station.Operaattor.trim() !== '' ? station.Operaattor : 'Missing'}</td>
               </tr>
             ))}
           </tbody>
@@ -102,4 +102,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Stations;
