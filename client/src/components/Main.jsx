@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../components-styling/main.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBicycle } from '@fortawesome/free-solid-svg-icons';
+import {Link} from 'react-router-dom';
 
 function Main() {
   const [journeys, setJourneys] = useState([]);
@@ -66,7 +67,7 @@ function Main() {
       <div className="home-nav">
         <ul className="homenav-list">
           <FontAwesomeIcon id="homeIcon" icon={faBicycle} size="2x" />
-          <li>Stations</li>
+          <li><Link to="/stations" className='nav-link'>Stations</Link></li>
         </ul>
         <input id="home-search" type="text" placeholder="Search for stations and see the rides!" />
       </div>
@@ -74,7 +75,7 @@ function Main() {
         <h1>Welcome to Helsinki Bike App!</h1>
       </div>
       <div className="ride-div">
-        <h2 className="ride-text">See where people have cycled around Helsinki!</h2>
+        <h2 className="ride-text">Take a closer look at the journeys around Helsinki!</h2>
         <table className="ride-table">
           <thead>
             <tr className="table-headers">
