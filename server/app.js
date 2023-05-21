@@ -18,7 +18,8 @@ mongoose.connect(uri)
     console.log('Connected to MongoDB Atlas');
 
 
-    // Uncomment the following functions one at a time to import data from CSV and save to the database IF database is empty.
+    // Uncomment the following functions one at a time and start the server to import data from CSV and save to the database IF database is empty.
+
     // journeyImporter.importJourneysFromCSV()
     //   .then(() => {
     //     console.log('Journey import complete');
