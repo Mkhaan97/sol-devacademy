@@ -11,7 +11,7 @@ app.use('/journeys', journeyRoutes);
 app.use('/stations', stationRoutes)
 
 
-// Connect to MongoDB
+// Connect to MongoDB Atlas database
 const uri = "mongodb+srv://mkhan:9wn7nw8o@cluster0.fjhmv.mongodb.net/journeylogs?retryWrites=true&w=majority";
 mongoose.connect(uri)
   .then(() => {

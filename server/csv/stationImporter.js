@@ -5,7 +5,7 @@ const Station = require('../models/Station');
 async function importStationsFromCSV() {
   return new Promise((resolve, reject) => {
     const fileName = 'Helsingin_ja_Espoon_kaupunkipyB6rA4asemat_avoin.csv';
-    let stations = []; // Array to store the stations
+    let stations = []; 
 
     const processFile = (fileName) => {
       return new Promise((resolve, reject) => {
@@ -58,4 +58,3 @@ async function importStationsFromCSV() {
 }
 
 module.exports = { importStationsFromCSV };
-
