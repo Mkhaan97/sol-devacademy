@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import '../components-styling/stations.css';
+import '../components-styling/styling.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBicycle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -15,7 +15,6 @@ function Stations() {
       const data = await response.json();
       setStations(data.stations);
       setTotalPages(data.totalPages);
-      console.log(data.stations);
     } catch (error) {
       console.log('Failed to fetch stations:', error);
     }

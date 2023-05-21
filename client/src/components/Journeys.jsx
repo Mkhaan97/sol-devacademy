@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import '../components-styling/main.css';
+import '../components-styling/styling.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBicycle } from '@fortawesome/free-solid-svg-icons';
 import {Link} from 'react-router-dom';
 
-function Main() {
+function Journeys() {
   const [journeys, setJourneys] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -101,4 +101,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Journeys;
