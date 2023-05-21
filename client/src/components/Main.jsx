@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import '../components-styling/main.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBicycle } from '@fortawesome/free-solid-svg-icons';
@@ -9,21 +9,20 @@ function Main() {
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    fetchJourneys();
-  }, [currentPage]);
-
-  const fetchJourneys = async () => {
+  const fetchJourneys = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:8000/journeys?limit=100&page=${currentPage}`);
       const data = await response.json();
       setJourneys(data.journeys);
       setTotalPages(data.totalPages);
-      console.log(data.journeys);
     } catch (error) {
       console.log('Failed to fetch journeys:', error);
     }
-  };
+  }, [currentPage]);
+
+  useEffect(() => {
+    fetchJourneys();
+  }, [currentPage, fetchJourneys]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -33,6 +32,7 @@ function Main() {
     const pageRange = 2; // Number of pages to show before and after the current page
     const pages = [];
 
+    // Generate page buttons based on current page and totalPages
     for (let i = Math.max(1, currentPage - pageRange); i <= Math.min(currentPage + pageRange, totalPages); i++) {
       pages.push(
         <button
@@ -69,7 +69,6 @@ function Main() {
           <FontAwesomeIcon id="homeIcon" icon={faBicycle} size="2x" />
           <li><Link to="/stations" className='nav-link'>Stations</Link></li>
         </ul>
-        <input id="home-search" type="text" placeholder="Search for stations and see the rides!" />
       </div>
       <div className="welcome-div">
         <h1>Welcome to Helsinki Bike App!</h1>

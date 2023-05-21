@@ -19,7 +19,6 @@ mongoose.connect(uri)
 
 
     // Uncomment the following functions one at a time to import data from CSV and save to the database IF database is empty.
-    
     // journeyImporter.importJourneysFromCSV()
     //   .then(() => {
     //     console.log('Journey import complete');
