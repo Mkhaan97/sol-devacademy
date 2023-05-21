@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import '../components-styling/stations.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBicycle } from '@fortawesome/free-solid-svg-icons';
@@ -8,12 +8,8 @@ function Stations() {
   const [stations, setStations] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    fetchStations();
-  }, [currentPage]);
-
-  const fetchStations = async () => {
+  
+  const fetchStations = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:8000/stations?limit=100&page=${currentPage}`);
       const data = await response.json();
@@ -23,7 +19,12 @@ function Stations() {
     } catch (error) {
       console.log('Failed to fetch stations:', error);
     }
-  };
+  }, [currentPage]);
+  
+  useEffect(() => {
+    fetchStations();
+  }, [currentPage, fetchStations]);
+
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -69,7 +70,6 @@ function Stations() {
           <FontAwesomeIcon id="homeIcon" icon={faBicycle} size="2x" />
           <li><Link to="/" className='nav-link'>Journeys</Link></li>
         </ul>
-        <input id="home-search" type="text" placeholder="Search for stations and see the rides!" />
       </div>
       <div className="welcome-div">
         <h1>Welcome to Helsinki Bike App!</h1>

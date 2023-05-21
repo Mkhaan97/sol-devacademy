@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+
+// Model for each journey from the csv file
+
 const journeySchema = new mongoose.Schema({
   Departure: String,
   Return: String,

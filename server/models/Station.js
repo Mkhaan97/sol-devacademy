@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+// Model for each station from the csv file
+
+
 const stationSchema = new mongoose.Schema({
   FID: String,
   ID: String,

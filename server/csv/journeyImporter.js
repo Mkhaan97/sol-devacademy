@@ -1,29 +1,28 @@
-
 const fs = require('fs');
 const csv = require('csv-parser');
 const Journey = require('../models/Journey');
 
 async function importJourneysFromCSV() {
   return new Promise((resolve, reject) => {
-    const fileNames = ['2021-05.csv', '2021-06.csv', '2021-07.csv']; // Update with your desired file names
-    const importCountLimit = 100000; // Limited to 100 000 journeys per file because of storage issues in MongoDB Atlas 
+    const fileNames = ['2021-05.csv', '2021-06.csv', '2021-07.csv'];
+    const importCountLimit = 100000; // Limited to 100 000 journeys per file because of storage restrictions in MongoDB Atlas
 
-    let journeys = []; // Array to store the journeys
+    let journeys = [];
 
     const processFile = (fileName) => {
       return new Promise((resolve, reject) => {
         fs.createReadStream(fileName)
-          .pipe(csv())
+          .pipe(csv({headers: false})) // Targeting by index instead of headers because of undefined properties
           .on('data', (data) => {
             const journey = {
-              Departure: String(data.Departure),
-              Return: String(data.Return),
-              'Departure station id': String(data['Departure station id']),
-              'Departure station name': data['Departure station name'],
-              'Return station id': String(data['Return station id']),
-              'Return station name': data['Return station name'],
-              'Covered distance (m)': Number(data['Covered distance (m)']),
-              'Duration (sec.)': Number(data['Duration (sec.)']),
+              Departure: String(data[0]),
+              Return: String(data[1]),
+              'Departure station id': String(data[2]),
+              'Departure station name': data[3],
+              'Return station id': String(data[4]),
+              'Return station name': data[5],
+              'Covered distance (m)': Number(data[6]),
+              'Duration (sec.)': Number(data[7]),
             };
 
             if (
@@ -36,7 +35,7 @@ async function importJourneysFromCSV() {
           })
           .on('end', async () => {
             try {
-              await Journey.insertMany(journeys); // Insert all the journeys at once
+              await Journey.insertMany(journeys);
               console.log('Import complete for', fileName);
               resolve();
             } catch (error) {
