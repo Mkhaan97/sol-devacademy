@@ -1,14 +1,14 @@
 import React from "react";
-import Main from "./components/Main.jsx";
+import MainPage from "./pages/MainPage";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Stations from "./components/Stations.jsx";
+import SecondPage from "./pages/SecondPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/stations" element={<Stations />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/stations" element={<SecondPage />} />
       </Routes>
     </BrowserRouter>
   );
