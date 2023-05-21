@@ -12,7 +12,7 @@ async function importJourneysFromCSV() {
     const processFile = (fileName) => {
       return new Promise((resolve, reject) => {
         fs.createReadStream(fileName)
-          .pipe(csv({headers: false})) // Targeting by index instead of headers because of undefined headers
+          .pipe(csv({headers: false})) // Targeting by index instead of headers because of undefined properties
           .on('data', (data) => {
             const journey = {
               Departure: String(data[0]),
